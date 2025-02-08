@@ -1,0 +1,23 @@
+.hero {
+  height: 400px;
+  background-image: url("../../../public/images/auto_parts_store_wide.jpeg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero-content {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 500px;
+  color: white;
+  text-align: right;
+}
+
+.hero-text {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  border-radius: 8px;
+}
