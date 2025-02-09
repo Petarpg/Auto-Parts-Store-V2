@@ -60,6 +60,17 @@ const brandsData = [
     name: "Nissan",
     image: "images/brands/nissan.png",
   },
+  {
+    id: "volvo",
+    name: "Volvo",
+    image: "images/brands/volvo.png",
+  },
+  {
+    id: "peugeot",
+    name: "Peugeot",
+    image: "images/brands/peugeot.png",
+  },
+
   // Add more brands here
 ];
 
@@ -252,6 +263,25 @@ const modelsData = {
       image: "images/models/nissan-maxima.jpg",
     },
   ],
+  volvo: [
+    {
+      id: "volvo-s60",
+      name: "S60",
+      image: "images/models/volvo-s60.jpg",
+    },
+
+    {
+      id: "volvo-s70",
+      name: "S70",
+      image: "images/models/volvo-s70.jpg",
+    },
+
+    {
+      id: "volvo-s90",
+      name: "S90",
+      image: "images/models/volvo-s90.jpg",
+    },
+  ],
 };
 
 // Expanded models data
@@ -364,6 +394,11 @@ const autoPartsCategories = [
     name: "Accessories",
     image: "images/parts/accessories.jpg",
   },
+  {
+    id: "filters",
+    name: "Filters",
+    image: "images/parts/filters.jpg",
+  },
 ];
 
 // Subcategories data organized by category
@@ -392,13 +427,24 @@ const autoPartsData = {
       image: "images/parts/accessories/cosmetics.jpg",
     },
   ],
+  filters: [
+    {
+      id: "oil-filters",
+      name: "Oil Filters",
+      image: "images/parts/filters/oil-filters.jpg",
+    },
+    {
+      id: "air-filters",
+      name: "Air Filters",
+      image: "images/parts/filters/air-filters.jpg",
+    },
+  ],
 };
 
 // Parts data organized by subcategory and expanded model
 const partsData = {
   flywheel: {
     "audi-80-b2": [
-      // Parts specific to Audi 80 B2
       {
         id: "flywheel-1",
         name: "Flywheel",
@@ -410,7 +456,6 @@ const partsData = {
         ],
       },
     ],
-    // Add parts for other models
   },
   clutch: {
     "audi-80-b2": [
@@ -426,31 +471,36 @@ const partsData = {
       },
     ],
   },
-  alarms: [
-    {
-      id: "alarm-1",
-      name: "Car Alarm System",
-      image: "images/parts/accessories/alarm-1.jpg",
-      price: 149.99,
-      additionalImages: [
-        "images/parts/accessories/alarm-1-alt1.jpg",
-        "images/parts/accessories/alarm-1-alt2.jpg",
-      ],
-    },
-  ],
-  cosmetics: [
-    {
-      id: "cosmetic-1",
-      name: "Car Cosmetic",
-      image: "images/parts/accessories/cosmetic-1.jpg",
-      price: 149.99,
-      additionalImages: [
-        "images/parts/accessories/alarm-1-alt1.jpg",
-        "images/parts/accessories/alarm-1-alt2.jpg",
-      ],
-    },
-  ],
-  // Add parts for other engines
+  alarms: {
+    all: [
+      // Universal parts available for all models
+      {
+        id: "alarm-1",
+        name: "Car Alarm System",
+        image: "images/parts/accessories/alarm-1.jpg",
+        price: 149.99,
+        additionalImages: [
+          "images/parts/accessories/alarm-1-alt1.jpg",
+          "images/parts/accessories/alarm-1-alt2.jpg",
+        ],
+      },
+    ],
+  },
+  cosmetics: {
+    all: [
+      // Universal parts available for all models
+      {
+        id: "spray",
+        name: "Car spray",
+        image: "images/parts/accessories/cosmetic-1.jpg",
+        price: 149.99,
+        additionalImages: [
+          "images/parts/accessories/cosmetic-1-alt1.jpg",
+          "images/parts/accessories/cosmetic-1-alt2.jpg",
+        ],
+      },
+    ],
+  },
 };
 
 const Slider = () => {
@@ -642,8 +692,9 @@ const Slider = () => {
         ));
 
       case "components":
-        if (!selectedSubcategory || !selectedExpandedModel) return null;
+        if (!selectedSubcategory) return null;
         const parts =
+          partsData[selectedSubcategory.id]?.["all"] ||
           partsData[selectedSubcategory.id]?.[selectedExpandedModel.id];
         if (!parts) return null;
 
