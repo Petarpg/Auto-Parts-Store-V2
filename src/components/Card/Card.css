@@ -1,5 +1,7 @@
 .card {
-  width: 200px;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -29,4 +31,45 @@
   padding: 1rem;
   text-align: center;
   font-weight: bold;
+  font-size: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .card {
+    max-width: 180px;
+  }
+
+  .card-image {
+    height: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 150px;
+  }
+
+  .card-image {
+    height: 120px;
+  }
+
+  .card-name {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    max-width: 130px;
+  }
+
+  .card-image {
+    height: 100px;
+    padding: 0.5rem;
+  }
+
+  .card-name {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
 }

@@ -3,37 +3,274 @@ import Card from "../Card/Card";
 import "./Slider.css";
 import ProductCard from "../ProductCard/ProductCard";
 
+// Brands data
+const brandsData = [
+  {
+    id: "audi",
+    name: "Audi",
+    image: "images/brands/audi.png",
+  },
+  {
+    id: "bmw",
+    name: "BMW",
+    image: "images/brands/bmw.png",
+  },
+  {
+    id: "opel",
+    name: "Opel",
+    image: "images/brands/opel.png",
+  },
+  {
+    id: "mazda",
+    name: "Mazda",
+    image: "images/brands/mazda.png",
+  },
+  {
+    id: "dacia",
+    name: "Dacia",
+    image: "images/brands/dacia.png",
+  },
+  {
+    id: "hyundai",
+    name: "Hyundai",
+    image: "images/brands/hyundai.png",
+  },
+  {
+    id: "mercedes",
+    name: "Mercedes",
+    image: "images/brands/mercedes.png",
+  },
+  {
+    id: "toyota",
+    name: "Toyota",
+    image: "images/brands/toyota.png",
+  },
+  {
+    id: "volkswagen",
+    name: "Volkswagen",
+    image: "images/brands/volkswagen.png",
+  },
+  {
+    id: "skoda",
+    name: "Skoda",
+    image: "images/brands/skoda.png",
+  },
+  {
+    id: "nissan",
+    name: "Nissan",
+    image: "images/brands/nissan.png",
+  },
+  // Add more brands here
+];
+
+// Models data
+const modelsData = {
+  audi: [
+    {
+      id: "audi-80",
+      name: "Audi 80",
+      image: "images/models/audi-80.jpg",
+    },
+    {
+      id: "audi-100",
+      name: "Audi 100",
+      image: "images/models/audi-100.png",
+    },
+    {
+      id: "audi-a3",
+      name: "Audi A3",
+      image: "images/models/audi-a3.jpg",
+    },
+  ],
+  bmw: [
+    {
+      id: "bmw-3",
+      name: "3 Series",
+      image: "images/models/bmw-3.jpg",
+    },
+    {
+      id: "bmw-5",
+      name: "5 Series",
+      image: "images/models/bmw-5.jpg",
+    },
+    {
+      id: "bmw-7",
+      name: "7 Series",
+      image: "images/models/bmw-7.jpg",
+    },
+  ],
+  opel: [
+    {
+      id: "opel-astra",
+      name: "Astra",
+      image: "images/models/opel-astra.jpg",
+    },
+    {
+      id: "opel-corsa",
+      name: "Corsa",
+      image: "images/models/opel-corsa.jpg",
+    },
+    {
+      id: "opel-vectra",
+      name: "Vectra",
+      image: "images/models/opel-vectra.jpg",
+    },
+  ],
+  mazda: [
+    {
+      id: "mazda-323",
+      name: "323",
+      image: "images/models/mazda-323.jpg",
+    },
+    {
+      id: "mazda-626",
+      name: "626",
+      image: "images/models/mazda-626.jpg",
+    },
+    {
+      id: "mazda-mx6",
+      name: "MX-6",
+      image: "images/models/mazda-mx6.jpg",
+    },
+  ],
+  dacia: [
+    {
+      id: "dacia-logan",
+      name: "Logan",
+      image: "images/models/dacia-logan.jpg",
+    },
+    {
+      id: "dacia-sandero",
+      name: "Sandero",
+      image: "images/models/dacia-sandero.jpg",
+    },
+    {
+      id: "dacia-duster",
+      name: "Duster",
+      image: "images/models/dacia-duster.jpg",
+    },
+  ],
+  hyundai: [
+    {
+      id: "hyundai-accent",
+      name: "Accent",
+      image: "images/models/hyundai-accent.jpg",
+    },
+    {
+      id: "hyundai-elantra",
+      name: "Elantra",
+      image: "images/models/hyundai-elantra.jpg",
+    },
+    {
+      id: "hyundai-sonata",
+      name: "Sonata",
+      image: "images/models/hyundai-sonata.jpg",
+    },
+  ],
+  mercedes: [
+    {
+      id: "mercedes-c",
+      name: "C-Class",
+      image: "images/models/mercedes-c.jpg",
+    },
+    {
+      id: "mercedes-e",
+      name: "E-Class",
+      image: "images/models/mercedes-e.jpg",
+    },
+    {
+      id: "mercedes-s",
+      name: "S-Class",
+      image: "images/models/mercedes-s.jpg",
+    },
+  ],
+  toyota: [
+    {
+      id: "toyota-corolla",
+      name: "Corolla",
+      image: "images/models/toyota-corolla.jpg",
+    },
+    {
+      id: "toyota-camry",
+      name: "Camry",
+      image: "images/models/toyota-camry.jpg",
+    },
+    {
+      id: "toyota-avalon",
+      name: "Avalon",
+      image: "images/models/toyota-avalon.jpg",
+    },
+  ],
+  volkswagen: [
+    {
+      id: "vw-golf",
+      name: "Golf",
+      image: "images/models/vw-golf.jpg",
+    },
+    {
+      id: "vw-passat",
+      name: "Passat",
+      image: "images/models/vw-passat.jpg",
+    },
+    {
+      id: "vw-polo",
+      name: "Polo",
+      image: "images/models/vw-polo.jpg",
+    },
+  ],
+  skoda: [
+    {
+      id: "skoda-octavia",
+      name: "Octavia",
+      image: "images/models/skoda-octavia.jpg",
+    },
+    {
+      id: "skoda-fabia",
+      name: "Fabia",
+      image: "images/models/skoda-fabia.jpg",
+    },
+    {
+      id: "skoda-superb",
+      name: "Superb",
+      image: "images/models/skoda-superb.jpg",
+    },
+  ],
+  nissan: [
+    {
+      id: "nissan-almera",
+      name: "Almera",
+      image: "images/models/nissan-almera.jpg",
+    },
+    {
+      id: "nissan-primera",
+      name: "Primera",
+      image: "images/models/nissan-primera.jpg",
+    },
+    {
+      id: "nissan-maxima",
+      name: "Maxima",
+      image: "images/models/nissan-maxima.jpg",
+    },
+  ],
+};
+
 // Expanded models data
 const expandedModelsData = {
   "audi-80": [
     {
+      id: "audi-80-b2",
+      name: "Audi 80 B2",
+      image: "images/models/expanded/audi-80-b2.jpg",
+    },
+    {
       id: "audi-80-b3",
       name: "Audi 80 B3",
       image: "images/models/expanded/audi-80-b3.jpg",
-      engines: [
-        {
-          id: "eng-1",
-          name: "1.8",
-          specs: {
-            engine: "1.8L I4",
-            power: "75kW/102HP",
-            year: "1986-1991",
-            fuelType: "Gasoline",
-            engineCode: "PM",
-          },
-        },
-        {
-          id: "eng-2",
-          name: "1.6D",
-          specs: {
-            engine: "1.6L I4",
-            power: "54kW/73HP",
-            year: "1986-1991",
-            fuelType: "Diesel",
-            engineCode: "RA",
-          },
-        },
-      ],
+    },
+    {
+      id: "audi-80-b4",
+      name: "Audi 80 B4",
+      image: "images/models/expanded/audi-80-b4.jpg",
     },
   ],
   "audi-100": [
@@ -41,30 +278,6 @@ const expandedModelsData = {
       id: "audi-100-c3",
       name: "Audi 100 C3",
       image: "images/models/audi-100-c4.png",
-      engines: [
-        {
-          id: "eng-3",
-          name: "2.0",
-          specs: {
-            engine: "2.0L I5",
-            power: "85kW/115HP",
-            year: "1988-1991",
-            fuelType: "Gasoline",
-            engineCode: "PS",
-          },
-        },
-        {
-          id: "eng-4",
-          name: "2.5 TDI",
-          specs: {
-            engine: "2.5L I5",
-            power: "88kW/120HP",
-            year: "1990-1994",
-            fuelType: "Diesel",
-            engineCode: "AAT",
-          },
-        },
-      ],
     },
   ],
   "audi-a3": [
@@ -72,155 +285,168 @@ const expandedModelsData = {
       id: "audi-a3-8l",
       name: "Audi A3 8L",
       image: "images/models/audi-100-c4.png",
-      engines: [
-        {
-          id: "eng-5",
-          name: "1.8T",
-          specs: {
-            engine: "1.8L I4 Turbo",
-            power: "110kW/150HP",
-            year: "1996-2003",
-            fuelType: "Gasoline",
-            engineCode: "AGU",
-          },
-        },
-        {
-          id: "eng-6",
-          name: "1.9 TDI",
-          specs: {
-            engine: "1.9L I4",
-            power: "66kW/90HP",
-            year: "1996-2001",
-            fuelType: "Diesel",
-            engineCode: "AGR",
-          },
-        },
-      ],
+    },
+  ],
+  "bmw-3": [
+    {
+      id: "bmw-3-e30",
+      name: "3 Series E30",
+      image: "images/models/expanded/bmw-3-e30.jpg",
+    },
+    {
+      id: "bmw-3-e36",
+      name: "3 Series E36",
+      image: "images/models/expanded/bmw-3-e36.jpg",
+    },
+    {
+      id: "bmw-3-e46",
+      name: "3 Series E46",
+      image: "images/models/expanded/bmw-3-e46.jpg",
+    },
+  ],
+  "opel-astra": [
+    {
+      id: "opel-astra-f",
+      name: "Astra F",
+      image: "images/models/expanded/opel-astra-f.jpg",
+    },
+    {
+      id: "opel-astra-g",
+      name: "Astra G",
+      image: "images/models/expanded/opel-astra-g.jpg",
+    },
+    {
+      id: "opel-astra-h",
+      name: "Astra H",
+      image: "images/models/expanded/opel-astra-h.jpg",
     },
   ],
 };
 
-// Auto parts categories for each engine type
-const enginePartsData = {
-  "eng-1": {
-    transmission: [
-      {
-        id: "flywheel-1",
-        name: "Flywheel",
-        image: "images/parts/brake-system.jpg",
+// Engine data
+const engineData = {
+  "audi-80-b2": [
+    {
+      id: "eng-1",
+      name: "1.6",
+      specs: {
+        engine: "1.6L I4",
+        power: "75kW/102HP",
+        year: "1978-1984",
+        fuelType: "Gasoline",
+        engineCode: "YN",
       },
-      {
-        id: "clutch-1",
-        name: "Clutch Kit",
-        image: "images/parts/brake-system.jpg",
+    },
+    {
+      id: "eng-2",
+      name: "1.6D",
+      specs: {
+        engine: "1.6L I4",
+        power: "54kW/73HP",
+        year: "1980-1984",
+        fuelType: "Diesel",
+        engineCode: "CR",
       },
-    ],
-    accessories: [
-      {
-        id: "alarm-1",
-        name: "Car Alarm System",
-        image: "images/parts/brake-system.jpg",
-      },
-      {
-        id: "cosmetic-1",
-        name: "Body Kit",
-        image: "images/parts/brake-system.jpg",
-      },
-    ],
-  },
-  "eng-2": {
-    transmission: [
-      {
-        id: "flywheel-2",
-        name: "Diesel Flywheel",
-        image: "images/parts/brake-system.jpg",
-      },
-      {
-        id: "clutch-2",
-        name: "Heavy Duty Clutch",
-        image: "images/parts/brake-system.jpg",
-      },
-    ],
-    accessories: [
-      {
-        id: "alarm-2",
-        name: "Remote Start System",
-        image: "images/parts/brake-system.jpg",
-      },
-      {
-        id: "cosmetic-2",
-        name: "LED Lighting Kit",
-        image: "images/parts/brake-system.jpg",
-      },
-    ],
-  },
-  // Add similar structures for eng-3 through eng-6
+    },
+  ],
+  // Add engines for other models
 };
 
-// Auto parts categories
-const autoPartsTypes = [
+// Auto parts categories without subcategories
+const autoPartsCategories = [
   {
     id: "transmission",
     name: "Transmission",
-    image: "images/parts/brake-system.jpg",
-    components: [
-      {
-        id: "flywheel",
-        name: "Flywheel",
-        image: "images/parts/brake-system.jpg",
-      },
-      {
-        id: "clutch",
-        name: "Clutch",
-        image: "images/parts/brake-system.jpg",
-      },
-    ],
+    image: "images/parts/transmission.jpg",
   },
   {
     id: "accessories",
-    name: "Auto Accessories",
-    image: "images/parts/brake-system.jpg",
-    components: [
-      {
-        id: "alarms",
-        name: "Car Alarms",
-        image: "images/parts/brake-system.jpg",
-      },
-      {
-        id: "cosmetics",
-        name: "Car Cosmetics",
-        image: "images/parts/brake-system.jpg",
-      },
-    ],
+    name: "Accessories",
+    image: "images/parts/accessories.jpg",
   },
 ];
 
-// Original brandsData remains the same
-const brandsData = [
-  {
-    id: "audi",
-    name: "Audi",
-    image: "images/brands/audi.png",
-    models: [
-      {
-        id: "audi-80",
-        name: "Audi 80",
-        image: "images/models/audi-80.jpg",
-      },
-      {
-        id: "audi-100",
-        name: "Audi 100",
-        image: "images/models/audi-100.png",
-      },
-      {
-        id: "audi-a3",
-        name: "Audi A3",
-        image: "images/models/audi-a3.jpg",
-      },
-    ],
-  },
-  // Add more brands here
-];
+// Subcategories data organized by category
+const autoPartsData = {
+  transmission: [
+    {
+      id: "flywheel",
+      name: "Flywheel",
+      image: "images/parts/transmission/flywheel.jpg",
+    },
+    {
+      id: "clutch",
+      name: "Clutch",
+      image: "images/parts/transmission/clutch.jpg",
+    },
+  ],
+  accessories: [
+    {
+      id: "alarms",
+      name: "Car Alarms",
+      image: "images/parts/accessories/alarms.jpg",
+    },
+    {
+      id: "cosmetics",
+      name: "Car Cosmetics",
+      image: "images/parts/accessories/cosmetics.jpg",
+    },
+  ],
+};
+
+// Parts data organized by engine
+const partsData = {
+  flywheel: [
+    {
+      id: "flywheel-1",
+      name: "Flywheel",
+      image: "images/parts/transmission/flywheel-1.jpg",
+      price: 299.99,
+
+      additionalImages: [
+        "images/parts/transmission/flywheel-1-alt1.jpg",
+        "images/parts/transmission/flywheel-1-alt2.jpg",
+      ],
+    },
+  ],
+  clutch: [
+    {
+      id: "clutch-1",
+      name: "Clutch Kit",
+      image: "images/parts/transmission/clutch-1.jpg",
+      price: 199.99,
+      additionalImages: [
+        "images/parts/transmission/clutch-1-alt1.jpg",
+        "images/parts/transmission/clutch-1-alt2.jpg",
+      ],
+    },
+  ],
+  alarms: [
+    {
+      id: "alarm-1",
+      name: "Car Alarm System",
+      image: "images/parts/accessories/alarm-1.jpg",
+      price: 149.99,
+      additionalImages: [
+        "images/parts/accessories/alarm-1-alt1.jpg",
+        "images/parts/accessories/alarm-1-alt2.jpg",
+      ],
+    },
+  ],
+  cosmetics: [
+    {
+      id: "cosmetic-1",
+      name: "Car Cosmetic",
+      image: "images/parts/accessories/cosmetic-1.jpg",
+      price: 149.99,
+      additionalImages: [
+        "images/parts/accessories/alarm-1-alt1.jpg",
+        "images/parts/accessories/alarm-1-alt2.jpg",
+      ],
+    },
+  ],
+  // Add parts for other engines
+};
 
 const Slider = () => {
   // Track the current view and selections
@@ -230,6 +456,7 @@ const Slider = () => {
   const [selectedExpandedModel, setSelectedExpandedModel] = useState(null);
   const [selectedEngine, setSelectedEngine] = useState(null);
   const [selectedPartsType, setSelectedPartsType] = useState(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [fuelTypeFilter, setFuelTypeFilter] = useState(null);
   const [cartCount, setCartCount] = useState(0);
 
@@ -252,9 +479,13 @@ const Slider = () => {
         setSelectedEngine(null);
         setCurrentView("engines");
         break;
-      case "components":
+      case "subcategories":
         setSelectedPartsType(null);
         setCurrentView("autoPartsTypes");
+        break;
+      case "components":
+        setSelectedSubcategory(null);
+        setCurrentView("subcategories");
         break;
       default:
         break;
@@ -318,19 +549,18 @@ const Slider = () => {
         ));
 
       case "models":
-        return (
-          selectedBrand?.models?.map((model) => (
-            <Card
-              key={model.id}
-              image={model.image}
-              name={model.name}
-              onClick={() => {
-                setSelectedModel(model);
-                setCurrentView("expandedModels");
-              }}
-            />
-          )) || null
-        );
+        if (!selectedBrand) return null;
+        return modelsData[selectedBrand.id].map((model) => (
+          <Card
+            key={model.id}
+            image={model.image}
+            name={model.name}
+            onClick={() => {
+              setSelectedModel(model);
+              setCurrentView("expandedModels");
+            }}
+          />
+        ));
 
       case "expandedModels":
         return (
@@ -350,12 +580,15 @@ const Slider = () => {
         );
 
       case "engines":
-        if (!selectedExpandedModel?.engines) return null;
+        if (!selectedExpandedModel) return null;
 
-        const engines = selectedExpandedModel.engines.filter(
+        const engines = engineData[selectedExpandedModel.id]?.filter(
           (engine) =>
             !fuelTypeFilter || engine.specs.fuelType === fuelTypeFilter
         );
+
+        if (!engines) return null;
+
         return (
           <>
             <FilterButtons />
@@ -376,78 +609,49 @@ const Slider = () => {
         );
 
       case "autoPartsTypes":
-        return (
-          <div className="parts-types-container">
-            {autoPartsTypes.map((type) => (
-              <Card
-                key={type.id}
-                image={type.image}
-                name={type.name}
-                onClick={() => {
-                  setSelectedPartsType(type);
-                  setCurrentView("components");
-                }}
-              />
-            ))}
-          </div>
-        );
+        if (!selectedEngine) return null;
+        return autoPartsCategories.map((category) => (
+          <Card
+            key={category.id}
+            image={category.image}
+            name={category.name}
+            onClick={() => {
+              setSelectedPartsType(category);
+              setCurrentView("subcategories");
+            }}
+          />
+        ));
+
+      case "subcategories":
+        if (!selectedPartsType) return null;
+        return autoPartsData[selectedPartsType.id].map((subcategory) => (
+          <Card
+            key={subcategory.id}
+            image={subcategory.image}
+            name={subcategory.name}
+            onClick={() => {
+              setSelectedSubcategory(subcategory);
+              setCurrentView("components");
+            }}
+          />
+        ));
 
       case "components":
-        if (!selectedPartsType) return null;
+        if (!selectedSubcategory) return null;
+        const parts = partsData[selectedSubcategory.id];
+        if (!parts) return null;
+
         return (
           <div className="components-container">
-            {selectedPartsType.components.map((component) => (
+            {parts.map((part) => (
               <ProductCard
-                key={component.id}
+                key={part.id}
                 product={{
-                  ...component,
-                  price: 100.0, // Add appropriate price
-                  additionalImages: [
-                    component.image,
-                    component.image,
-                    component.image,
-                  ],
+                  ...part,
                   onAddToCart: handleAddToCart,
                 }}
               />
             ))}
-          </div>
-        );
-
-      case "parts":
-        if (!selectedEngine) return null;
-
-        return (
-          <div className="parts-container">
-            <h3 className="parts-section-title">Transmission Parts</h3>
-            <div className="parts-section">
-              {enginePartsData[selectedEngine.id]?.transmission.map((part) => (
-                <Card
-                  key={part.id}
-                  image={part.image}
-                  name={part.name}
-                  onClick={() => {
-                    // Handle part selection
-                    console.log(`Selected part: ${part.name}`);
-                  }}
-                />
-              ))}
-            </div>
-
-            <h3 className="parts-section-title">Accessories</h3>
-            <div className="parts-section">
-              {enginePartsData[selectedEngine.id]?.accessories.map((part) => (
-                <Card
-                  key={part.id}
-                  image={part.image}
-                  name={part.name}
-                  onClick={() => {
-                    // Handle part selection
-                    console.log(`Selected accessory: ${part.name}`);
-                  }}
-                />
-              ))}
-            </div>
           </div>
         );
 
@@ -458,15 +662,25 @@ const Slider = () => {
 
   return (
     <div className="slider-container">
-      <button
-        className="nav-arrow left"
-        onClick={handleBack}
-        style={{ visibility: currentView !== "brands" ? "visible" : "hidden" }}
-      >
-        <i className="fas fa-chevron-left"></i>
-      </button>
+      {currentView !== "brands" && (
+        <button
+          className="nav-arrow left"
+          onClick={handleBack}
+          style={{
+            visibility: currentView !== "brands" ? "visible" : "hidden",
+          }}
+        >
+          <i className="fas fa-chevron-left"></i>
+        </button>
+      )}
 
-      <div className="slider">{renderContent()}</div>
+      <div
+        className={`slider ${
+          currentView !== "brands" ? "horizontal-scroll" : ""
+        }`}
+      >
+        {renderContent()}
+      </div>
     </div>
   );
 };

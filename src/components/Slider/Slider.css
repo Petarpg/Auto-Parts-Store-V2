@@ -2,18 +2,117 @@
   position: relative;
   padding: 2rem;
   margin: 2rem 0;
+  max-height: 800px; /* Limit height for scrolling */
 }
 
 .slider {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 100%;
+}
+
+/* Update scrollbar styling for better appearance */
+.slider::-webkit-scrollbar {
+  width: 8px;
+  display: block;
+}
+
+.slider::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.slider::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.slider::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 1200px) {
+  .slider {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .slider-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .slider-container {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .slider-container {
+    padding: 0.8rem;
+  }
+}
+
+/* Horizontal scroll views */
+.slider.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1rem; /* Add space for scrollbar */
+}
+
+/* Make horizontal scroll items responsive */
+.slider.horizontal-scroll .card,
+.engines-container .engine-card,
+.parts-section .card {
+  flex: 0 0 auto;
+  width: calc(33.333% - 1rem);
+  min-width: 200px;
+  max-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .slider.horizontal-scroll .card,
+  .engines-container .engine-card,
+  .parts-section .card {
+    width: calc(50% - 1rem);
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider.horizontal-scroll .card,
+  .engines-container .engine-card,
+  .parts-section .card {
+    width: calc(100% - 1rem);
+    min-width: 130px;
+  }
+}
+
+/* Add these classes to maintain existing styling for non-brand views */
+.engines-container,
+.parts-types-container,
+.components-container,
+.parts-section {
   display: flex;
   gap: 1rem;
   overflow-x: auto;
-  padding: 1rem;
-  scroll-behavior: smooth;
-}
-
-.slider::-webkit-scrollbar {
-  display: none;
 }
 
 .nav-arrow {
@@ -92,12 +191,6 @@
 
 .filter-btn:not(.active) {
   opacity: 0.7;
-}
-
-.engines-container {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: nowrap;
 }
 
 .parts-container {
