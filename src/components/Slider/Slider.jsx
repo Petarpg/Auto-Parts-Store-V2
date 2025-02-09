@@ -394,33 +394,38 @@ const autoPartsData = {
   ],
 };
 
-// Parts data organized by engine
+// Parts data organized by subcategory and expanded model
 const partsData = {
-  flywheel: [
-    {
-      id: "flywheel-1",
-      name: "Flywheel",
-      image: "images/parts/transmission/flywheel-1.jpg",
-      price: 299.99,
-
-      additionalImages: [
-        "images/parts/transmission/flywheel-1-alt1.jpg",
-        "images/parts/transmission/flywheel-1-alt2.jpg",
-      ],
-    },
-  ],
-  clutch: [
-    {
-      id: "clutch-1",
-      name: "Clutch Kit",
-      image: "images/parts/transmission/clutch-1.jpg",
-      price: 199.99,
-      additionalImages: [
-        "images/parts/transmission/clutch-1-alt1.jpg",
-        "images/parts/transmission/clutch-1-alt2.jpg",
-      ],
-    },
-  ],
+  flywheel: {
+    "audi-80-b2": [
+      // Parts specific to Audi 80 B2
+      {
+        id: "flywheel-1",
+        name: "Flywheel",
+        image: "images/parts/transmission/flywheel-1.jpg",
+        price: 299.99,
+        additionalImages: [
+          "images/parts/transmission/flywheel-1-alt1.jpg",
+          "images/parts/transmission/flywheel-1-alt2.jpg",
+        ],
+      },
+    ],
+    // Add parts for other models
+  },
+  clutch: {
+    "audi-80-b2": [
+      {
+        id: "clutch-1",
+        name: "Clutch Kit",
+        image: "images/parts/transmission/clutch-1.jpg",
+        price: 199.99,
+        additionalImages: [
+          "images/parts/transmission/clutch-1-alt1.jpg",
+          "images/parts/transmission/clutch-1-alt2.jpg",
+        ],
+      },
+    ],
+  },
   alarms: [
     {
       id: "alarm-1",
@@ -637,8 +642,9 @@ const Slider = () => {
         ));
 
       case "components":
-        if (!selectedSubcategory) return null;
-        const parts = partsData[selectedSubcategory.id];
+        if (!selectedSubcategory || !selectedExpandedModel) return null;
+        const parts =
+          partsData[selectedSubcategory.id]?.[selectedExpandedModel.id];
         if (!parts) return null;
 
         return (
