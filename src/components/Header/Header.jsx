@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMagnifyingGlass,
+  faUser,
+  faCartShopping,
+  faBars,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import "./Header.css";
 
 const Header = ({ cartCount = 0 }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <header className="header">
       <div className="header-content">
@@ -19,18 +29,27 @@ const Header = ({ cartCount = 0 }) => {
               className="search-input"
             />
             <button className="search-button">
-              <i className="fas fa-search"></i>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
           </div>
         </div>
 
-        <div className="header-actions">
-          <button className="login-button">Login</button>
+        <div className={`header-actions ${isMenuOpen ? "show" : ""}`}>
+          <button className="login-button">
+            <FontAwesomeIcon icon={faUser} />
+          </button>
           <div className="cart-icon">
-            <i className="fas fa-shopping-cart"></i>
+            <FontAwesomeIcon icon={faCartShopping} />
             <span className="cart-count">{cartCount}</span>
           </div>
         </div>
+
+        <button
+          className="burger-menu"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <FontAwesomeIcon icon={isMenuOpen ? faXmark : faBars} />
+        </button>
       </div>
     </header>
   );

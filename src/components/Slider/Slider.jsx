@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "../Card/Card";
 import "./Slider.css";
 import ProductCard from "../ProductCard/ProductCard";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 // Brands data
 const brandsData = [
@@ -505,6 +506,7 @@ const partsData = {
 
 const Slider = () => {
   // Track the current view and selections
+  const [direction, setDirection] = useState("slide-right");
   const [currentView, setCurrentView] = useState("brands");
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);
@@ -517,6 +519,7 @@ const Slider = () => {
 
   // Handle navigation
   const handleBack = () => {
+    setDirection("slide-left");
     switch (currentView) {
       case "models":
         setSelectedBrand(null);
@@ -589,132 +592,153 @@ const Slider = () => {
 
   // Render content based on current view
   const renderContent = () => {
-    switch (currentView) {
-      case "brands":
-        return brandsData.map((brand) => (
-          <Card
-            key={brand.id}
-            image={brand.image}
-            name={brand.name}
-            onClick={() => {
-              setSelectedBrand(brand);
-              setCurrentView("models");
-            }}
-          />
-        ));
+    const content = (
+      <div
+        className={`slider ${currentView === "brands" ? "brands-grid" : ""}`}
+      >
+        {currentView === "brands" &&
+          brandsData.map((brand) => (
+            <Card
+              key={brand.id}
+              image={brand.image}
+              name={brand.name}
+              onClick={() => {
+                setDirection("slide-right");
+                setSelectedBrand(brand);
+                setCurrentView("models");
+              }}
+            />
+          ))}
 
-      case "models":
-        if (!selectedBrand) return null;
-        return modelsData[selectedBrand.id].map((model) => (
-          <Card
-            key={model.id}
-            image={model.image}
-            name={model.name}
-            onClick={() => {
-              setSelectedModel(model);
-              setCurrentView("expandedModels");
-            }}
-          />
-        ));
+        {currentView === "models" && !selectedBrand && null}
 
-      case "expandedModels":
-        return (
-          (selectedModel &&
-            expandedModelsData[selectedModel.id]?.map((model) => (
-              <Card
-                key={model.id}
-                image={model.image}
-                name={model.name}
-                onClick={() => {
-                  setSelectedExpandedModel(model);
-                  setCurrentView("engines");
-                }}
-              />
-            ))) ||
-          null
-        );
+        {currentView === "models" &&
+          selectedBrand &&
+          modelsData[selectedBrand.id].map((model) => (
+            <Card
+              key={model.id}
+              image={model.image}
+              name={model.name}
+              onClick={() => {
+                setDirection("slide-right");
+                setSelectedModel(model);
+                setCurrentView("expandedModels");
+              }}
+            />
+          ))}
 
-      case "engines":
-        if (!selectedExpandedModel) return null;
+        {currentView === "expandedModels" && !selectedModel && null}
 
-        const engines = engineData[selectedExpandedModel.id]?.filter(
-          (engine) =>
-            !fuelTypeFilter || engine.specs.fuelType === fuelTypeFilter
-        );
+        {currentView === "expandedModels" &&
+          selectedModel &&
+          expandedModelsData[selectedModel.id]?.map((model) => (
+            <Card
+              key={model.id}
+              image={model.image}
+              name={model.name}
+              onClick={() => {
+                setDirection("slide-right");
+                setSelectedExpandedModel(model);
+                setCurrentView("engines");
+              }}
+            />
+          ))}
 
-        if (!engines) return null;
+        {currentView === "engines" && !selectedExpandedModel && null}
 
-        return (
+        {currentView === "engines" && selectedExpandedModel && (
           <>
             <FilterButtons />
             <div className="engines-container">
-              {engines.map((engine) => (
-                <EngineCard
-                  key={engine.id}
-                  engine={engine}
-                  specs={engine.specs}
-                  onClick={() => {
-                    setSelectedEngine(engine);
-                    setCurrentView("autoPartsTypes");
-                  }}
-                />
-              ))}
+              {engineData[selectedExpandedModel.id]
+                ?.filter(
+                  (engine) =>
+                    !fuelTypeFilter || engine.specs.fuelType === fuelTypeFilter
+                )
+                .map((engine) => (
+                  <EngineCard
+                    key={engine.id}
+                    engine={engine}
+                    specs={engine.specs}
+                    onClick={() => {
+                      setDirection("slide-right");
+                      setSelectedEngine(engine);
+                      setCurrentView("autoPartsTypes");
+                    }}
+                  />
+                ))}
             </div>
           </>
-        );
+        )}
 
-      case "autoPartsTypes":
-        if (!selectedEngine) return null;
-        return autoPartsCategories.map((category) => (
-          <Card
-            key={category.id}
-            image={category.image}
-            name={category.name}
-            onClick={() => {
-              setSelectedPartsType(category);
-              setCurrentView("subcategories");
-            }}
-          />
-        ));
+        {currentView === "autoPartsTypes" && !selectedEngine && null}
 
-      case "subcategories":
-        if (!selectedPartsType) return null;
-        return autoPartsData[selectedPartsType.id].map((subcategory) => (
-          <Card
-            key={subcategory.id}
-            image={subcategory.image}
-            name={subcategory.name}
-            onClick={() => {
-              setSelectedSubcategory(subcategory);
-              setCurrentView("components");
-            }}
-          />
-        ));
+        {currentView === "autoPartsTypes" &&
+          selectedEngine &&
+          autoPartsCategories.map((category) => (
+            <Card
+              key={category.id}
+              image={category.image}
+              name={category.name}
+              onClick={() => {
+                setDirection("slide-right");
+                setSelectedPartsType(category);
+                setCurrentView("subcategories");
+              }}
+            />
+          ))}
 
-      case "components":
-        if (!selectedSubcategory) return null;
-        const parts =
-          partsData[selectedSubcategory.id]?.["all"] ||
-          partsData[selectedSubcategory.id]?.[selectedExpandedModel.id];
-        if (!parts) return null;
+        {currentView === "subcategories" && !selectedPartsType && null}
 
-        return (
-          <div className="components-container">
-            {parts.map((part) => (
-              <ProductCard
-                key={part.id}
-                product={{
-                  ...part,
-                  onAddToCart: handleAddToCart,
-                }}
-              />
-            ))}
-          </div>
-        );
+        {currentView === "subcategories" &&
+          selectedPartsType &&
+          autoPartsData[selectedPartsType.id].map((subcategory) => (
+            <Card
+              key={subcategory.id}
+              image={subcategory.image}
+              name={subcategory.name}
+              onClick={() => {
+                setDirection("slide-right");
+                setSelectedSubcategory(subcategory);
+                setCurrentView("components");
+              }}
+            />
+          ))}
 
-      default:
-        return null;
-    }
+        {currentView === "components" && !selectedSubcategory && null}
+
+        {currentView === "components" && selectedSubcategory && (
+          <>
+            {partsData[selectedSubcategory.id]?.["all"] ||
+              partsData[selectedSubcategory.id]?.[selectedExpandedModel.id].map(
+                (part) => (
+                  <ProductCard
+                    key={part.id}
+                    product={{
+                      ...part,
+                      onAddToCart: handleAddToCart,
+                    }}
+                  />
+                )
+              )}
+          </>
+        )}
+      </div>
+    );
+
+    return (
+      <div className="image-wrapper">
+        <TransitionGroup>
+          <CSSTransition
+            key={currentView}
+            timeout={1000} // Match this with CSS transition duration
+            classNames={direction}
+          >
+            {content}
+          </CSSTransition>
+        </TransitionGroup>
+      </div>
+    );
   };
 
   return (
@@ -731,13 +755,7 @@ const Slider = () => {
         </button>
       )}
 
-      <div
-        className={`slider ${
-          currentView !== "brands" ? "horizontal-scroll" : ""
-        }`}
-      >
-        {renderContent()}
-      </div>
+      {renderContent()}
     </div>
   );
 };
