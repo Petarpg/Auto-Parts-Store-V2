@@ -93,6 +93,16 @@ const modelsData = {
       name: "Audi A3",
       image: "images/models/audi-a3.jpg",
     },
+    {
+      id: "audi-a4",
+      name: "Audi A4",
+      image: "images/models/audi-a4.jpg",
+    },
+    {
+      id: "audi-a5",
+      name: "Audi A5",
+      image: "images/models/audi-a5.jpg",
+    },
   ],
   bmw: [
     {
@@ -302,6 +312,11 @@ const expandedModelsData = {
       id: "audi-80-b4",
       name: "Audi 80 B4",
       image: "images/models/expanded/audi-80-b4.jpg",
+    },
+    {
+      id: "audi-80-b5",
+      name: "Audi 80 B5",
+      image: "images/models/expanded/audi-80-b5.jpg",
     },
   ],
   "audi-100": [
